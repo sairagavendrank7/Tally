@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000;
 
 // Function to send XML request to Tally Web Server to fetch data
 async function fetchTallyData() {
+    console.log('fetchTallyData');
     const xmlRequest = `
        <ENVELOPE>
         <HEADER>
@@ -55,6 +56,7 @@ async function fetchTallyData() {
 // API endpoint to get data from Tally
 app.get('/get-companies', async (req, res) => {
     try {
+        console.log('inside get company')
         // Fetch data from Tally
         const tallyData = await fetchTallyData();
 
