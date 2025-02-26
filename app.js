@@ -8,34 +8,33 @@ const port = process.env.PORT || 3000;
 async function fetchTallyData() {
     const xmlRequest = `
        <ENVELOPE>
-	<HEADER>
-		<VERSION>1</VERSION>
-		<TALLYREQUEST>Export</TALLYREQUEST>
-		<TYPE>Collection</TYPE>
-		<ID>List of Companies</ID>
-	</HEADER>
-	<BODY>
-		<DESC>
-			<STATICVARIABLES>
-            <SVIsSimpleCompany>No</SVIsSimpleCompany>
-            </STATICVARIABLES>
-			<TDL>
-				<TDLMESSAGE>
-					<COLLECTION ISMODIFY="No" ISFIXED="No" ISINITIALIZE="Yes" ISOPTION="No" ISINTERNAL="No" NAME="List of Companies">
-                    
-						<TYPE>Company</TYPE>
-						<NATIVEMETHOD>Name</NATIVEMETHOD>
-					</COLLECTION>
-                    <ExportHeader>EmpId:5989</ExportHeader>
-				</TDLMESSAGE>
-			</TDL>
-		</DESC>
-	</BODY>
-</ENVELOPE>
+        <HEADER>
+            <VERSION>1</VERSION>
+            <TALLYREQUEST>Export</TALLYREQUEST>
+            <TYPE>Collection</TYPE>
+            <ID>List of Companies</ID>
+        </HEADER>
+        <BODY>
+            <DESC>
+                <STATICVARIABLES>
+                    <SVIsSimpleCompany>No</SVIsSimpleCompany>
+                </STATICVARIABLES>
+                <TDL>
+                    <TDLMESSAGE>
+                        <COLLECTION ISMODIFY="No" ISFIXED="No" ISINITIALIZE="Yes" ISOPTION="No" ISINTERNAL="No" NAME="List of Companies">
+                            <TYPE>Company</TYPE>
+                            <NATIVEMETHOD>Name</NATIVEMETHOD>
+                        </COLLECTION>
+                        <ExportHeader>EmpId:5989</ExportHeader>
+                    </TDLMESSAGE>
+                </TDL>
+            </DESC>
+        </BODY>
+    </ENVELOPE>
     `;
 
     try {
-        // Send the XML request to Tally Web Server (running on localhost at port 9000)
+        // Send the XML request to Tally Web Server (make sure this is the correct URL)
         const response = await axios.post('http://localhost:9000', xmlRequest, {
             headers: {
                 'Content-Type': 'application/xml',
@@ -78,10 +77,14 @@ app.get('/get-companies', async (req, res) => {
             res.json(result);
         });
     } catch (error) {
-        console.error('Error in /get-tally-data route:', error);
-        res.status(500).send({ error:'Failed to fetch data from Tally -'+error });
+        console.error('Error in /get-companies route:', error);
+        res.status(500).send({ error: 'Failed to fetch data from Tally - ' + error.message });
     }
 });
+
+// Enable CORS for all routes if you're calling this from a browser
+const cors = require('cors');
+app.use(cors());  // Allow all origins, you can configure it for more security if needed
 
 // Start the server
 app.listen(port, () => {
