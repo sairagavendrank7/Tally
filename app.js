@@ -79,7 +79,7 @@ app.get('/get-companies', async (req, res) => {
         });
     } catch (error) {
         console.error('Error in /get-tally-data route:', error);
-        res.status(500).send({ error: 'Failed to fetch data from Tally' });
+        res.status(500).send({ error:'Failed to fetch data from Tally -'+error });
     }
 });
 
