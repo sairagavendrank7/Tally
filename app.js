@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const xml2js = require('xml2js');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Function to send XML request to Tally Web Server to fetch data
 async function fetchTallyData() {
