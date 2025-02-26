@@ -36,7 +36,7 @@ async function fetchTallyData() {
 
     try {
         // Send the XML request to Tally Web Server (make sure this is the correct URL)//http://SAIRAGAVENDRAN:9000//http://localhost:9000
-        const response = await axios.post('http://SAIRAGAVENDRAN:9000', xmlRequest, {
+        const response = await axios.post('https://2168-106-51-204-135.ngrok-free.app/', xmlRequest, {
             headers: {
                 'Content-Type': 'application/xml',
             },
@@ -101,3 +101,69 @@ app.use(cors());  // Allow all origins, you can configure it for more security i
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+
+
+/*To make Tally available on your local system and deploy it on Render.com, follow these steps:
+Step 1: Set Up Tally on Your Local System
+Install Tally: If you haven't installed Tally ERP 9 or Tally Prime, download and install it on your local system.
+Enable ODBC & HTTP Access:
+Open Tally → F12 (Configure) → Advanced Configuration.
+Enable HTTP Access and note down the port number (default: 9000).
+If using Tally Prime, enable Tally API from the settings.
+Verify Local API Access:
+Open a browser and enter:
+arduino
+http://localhost:9000
+If configured correctly, it should show a response from the Tally API.
+Step 2: Expose Tally to the Internet
+Since Tally runs locally, you need to expose it to the internet using ngrok or a similar service.
+Method 1: Using Ngrok
+Install ngrok (Download from ngrok.com).
+Run ngrok to expose your Tally API:
+sh
+ngrok http 9000
+It will generate a public URL like:
+arduino
+https://randomstring.ngrok.io
+This URL can now be used to access
+Tally API
+ remotely.
+Step 3: Deploy an API Proxy on Render
+Since Render doesn't support direct access to localhost, you need to create a proxy API that interacts with your Tally instance.
+1. Create a Simple Node.js Proxy Server
+Install Node.js on your system and create a basic Express server to forward requests.
+javascript
+const express = require("express");
+const axios = require("axios");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+const TALLY_URL = "
+http://localhost:9000";  // Replace with ngrok URL if needed
+
+app.use(express.json());
+
+app.get("/", async (req, res) => {
+    try {
+        const response = await axios.get(`${TALLY_URL}`);
+        res.send(response.data);
+    } catch (error) {
+        res.status(500).send("Error connecting to Tally");
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+2. Deploy on Render
+Sign up on Render.com
+Create a New Web Service → Select Node.js
+Connect your GitHub Repository (or upload your project manually)
+Set Environment Variables (e.g., PORT=3000)
+Deploy the Service
+Step 4: Access Tally via Render
+Once deployed, you will get a public Render URL (e.g., https://your-tally-api.onrender.com).
+Now you can access Tally data from anywhere using the Render proxy URL.
+Alternative: Use a Cloud VPS
+If you want a direct connection without ngrok, you can install Tally on a VPS like AWS, DigitalOcean, or Linode.
+Let me know if you need help with any step! :rocket:*/
