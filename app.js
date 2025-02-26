@@ -72,12 +72,21 @@ app.get('/get-companies', async (req, res) => {
             // Log the parsed JSON response
             console.log('Parsed JSON Response from Tally:');
             console.log(result);
+             // Log the parsed JSON response
+             //console.log('Parsed JSON Response from Tally:');
+             //console.log(JSON.stringify(result, null, 2));  // Pretty-print JSON
 
             // Return the parsed JSON response
-            res.json(result);
+           // res.json(result, null, 2);
+
+            // Manually stringify the JSON response before sending
+               const jsonResponse = JSON.stringify(result);
+               console.log(jsonResponse);
+            // Send the stringified JSON response
+               res.send(jsonResponse);
         });
     } catch (error) {
-        console.error('Error in /get-companies route:', error);
+        console.log('Error in /get-companies route:', error);
         res.status(500).send({ error: 'Failed to fetch data from Tally - ' +error });
     }
 });
