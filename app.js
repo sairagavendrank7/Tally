@@ -3,7 +3,7 @@ const axios = require('axios');
 const xml2js = require('xml2js');
 const app = express();
 const port = process.env.PORT || 3000;
-
+app.use(express.json());  // Middleware to parse JSON body
 // Function to send XML request to Tally Web Server to fetch data
 async function fetchTallyData() {
     console.log('fetchTallyData');
@@ -286,6 +286,7 @@ app.post('/create-ledgers', async (req, res) => {
 // Enable CORS for all routes if you're calling this from a browser
 const cors = require('cors');
 app.use(cors());  // Allow all origins, you can configure it for more security if needed
+
 
 // Start the server
 app.listen(port, () => {
