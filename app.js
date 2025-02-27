@@ -240,9 +240,11 @@ async function fetchTallyData2(ledgerData) {
 // API endpoint to create ledgers dynamically
 app.post('/create-ledgers', async (req, res) => {
     try {
+        console.log('request ::'+req);
+        console.log(req.body);
         // Get ledger data from the request body
         const ledgerData = req.body;
-
+        
         console.log('Received data to create ledger:', ledgerData);
 
         // Fetch data from Tally with dynamic ledger data
