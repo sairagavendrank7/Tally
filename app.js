@@ -36,7 +36,7 @@ async function fetchTallyData() {
 
     try {
         // Send the XML request to Tally Web Server (make sure this is the correct URL)//http://SAIRAGAVENDRAN:9000//http://localhost:9000
-        const response = await axios.post('https://2168-106-51-204-135.ngrok-free.app/', xmlRequest, {
+        const response = await axios.post('https://f823-106-51-204-135.ngrok-free.app', xmlRequest, {
             headers: {
                 'Content-Type': 'application/xml',
             },
