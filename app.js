@@ -203,13 +203,13 @@ async function fetchTallyData2(ledgerData) {
             <REQUESTDATA>
                 <TALLYMESSAGE xmlns:UDF="TallyUDF">
                     <LEDGER Action="Create">
-                        <NAME>${ledgerData.name}</NAME>
-                        <PARENT>${ledgerData.parent}</PARENT>
-                        <ADDRESS>${ledgerData.address}</ADDRESS>
-                        <COUNTRYOFRESIDENCE>${ledgerData.countryOfResidence}</COUNTRYOFRESIDENCE>
-                        <LEDSTATENAME>${ledgerData.state}</LEDSTATENAME>
-                        <LEDGERMOBILE>${ledgerData.mobile}</LEDGERMOBILE>
-                        <PARTYGSTIN>${ledgerData.gstin}</PARTYGSTIN>
+                        <NAME>{ledgerData.name}</NAME>
+                        <PARENT>{ledgerData.parent}</PARENT>
+                        <ADDRESS>{ledgerData.address}</ADDRESS>
+                        <COUNTRYOFRESIDENCE>{ledgerData.countryOfResidence}</COUNTRYOFRESIDENCE>
+                        <LEDSTATENAME>{ledgerData.state}</LEDSTATENAME>
+                        <LEDGERMOBILE>{ledgerData.mobile}</LEDGERMOBILE>
+                        <PARTYGSTIN>{ledgerData.gstin}</PARTYGSTIN>
                     </LEDGER>
                 </TALLYMESSAGE>
             </REQUESTDATA>
