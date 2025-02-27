@@ -203,13 +203,13 @@ async function fetchTallyData2(ledgerData) {
             <REQUESTDATA>
                 <TALLYMESSAGE xmlns:UDF="TallyUDF">
                     <LEDGER Action="Create">
-                        <NAME>{ledgerData.name}</NAME>
-                        <PARENT>{ledgerData.parent}</PARENT>
-                        <ADDRESS>{ledgerData.address}</ADDRESS>
-                        <COUNTRYOFRESIDENCE>{ledgerData.countryOfResidence}</COUNTRYOFRESIDENCE>
-                        <LEDSTATENAME>{ledgerData.state}</LEDSTATENAME>
-                        <LEDGERMOBILE>{ledgerData.mobile}</LEDGERMOBILE>
-                        <PARTYGSTIN>{ledgerData.gstin}</PARTYGSTIN>
+                        <NAME>${ledgerData.name}</NAME>
+                        <PARENT>${ledgerData.parent}</PARENT>
+                        <ADDRESS>${ledgerData.address}</ADDRESS>
+                        <COUNTRYOFRESIDENCE>${ledgerData.countryOfResidence}</COUNTRYOFRESIDENCE>
+                        <LEDSTATENAME>${ledgerData.state}</LEDSTATENAME>
+                        <LEDGERMOBILE>${ledgerData.mobile}</LEDGERMOBILE>
+                        <PARTYGSTIN>${ledgerData.gstin}</PARTYGSTIN>
                     </LEDGER>
                 </TALLYMESSAGE>
             </REQUESTDATA>
@@ -248,7 +248,7 @@ app.post('/create-ledgers', async (req, res) => {
         console.log('Received data to create ledger:', ledgerData);
 
         // Fetch data from Tally with dynamic ledger data
-        const tallyData = await fetchTallyData2(JSON.stringify(ledgerData));
+        const tallyData = await fetchTallyData2(ledgerData);
 
         // Log the XML response data before parsing
         console.log('XML Data before parsing:');
